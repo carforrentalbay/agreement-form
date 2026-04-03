@@ -3,29 +3,58 @@ body{
 }
 
 h6{
-  font-size: 11px;
+  font-size: 14.67px;
 }
 
 .main-container{
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  background-color: grey;
   gap: 1em;
+  width: 100%;
+}
+
+.col-4{
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  background-color: pink;
+  padding: 20px;
+  width: 320px
 }
 
 .form-container{
-  width: 200px;
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  background-color: white;
+  align-items: baseline;
 }
 
-.pdf-container{
-  background-color: pink;
-  width: 816px;
-  height: 1248px;
+.checkbox-label{
+  display: flex;
+  gap: 0.5em;
+}
+
+.pdf-container {
+  background-color: lightblue;
   font-family: 'Times New Roman', Times, serif;
-  padding: 28.799999999999997px;
+  width: 8.5in;
+  height: 13in;
+  padding: 0.3in;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2); /* Soft shadow */
+  /* position: sticky; THIS IS THE KEY */
+  overflow: hidden;
+  font-size: 14.67px;
+}
+
+.pdf-container p{
+  margin: 0 0 1.15 0;
+  line-height: 1.15;
+  font-size: 14.67px;
+}
+
+.pdf-container h6{
+  font-size: 14.67px;
 }
 
 .header-center{
@@ -37,4 +66,49 @@ h6{
 .header{
   font-weight: bold;
   text-decoration: underline;
+  margin: 0 0 16px 0;
+}
+
+.header-sign{
+  font-weight: bold;
+  margin: 0 0 16px 0;
+}
+
+@media print {
+  body {
+    background: none;
+  }
+  .pdf-container {
+    margin: 0;
+    box-shadow: none;
+    width: 100%; /* Printer will handle the physical size */
+  }
+  button {
+    display: none; /* Hide the "Download PDF" button when printing */
+  }
+}
+
+.vehicle-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr; /* Creates 3 equal columns */
+    margin-bottom: 1em;
+}
+
+.grid-item {
+    white-space: nowrap; /* Prevents "Plate Number" from wrapping to 2 lines */
+}
+
+.grid-item span {
+    min-width: 50px;
+    display: inline-block;
+}
+
+.owner-renter-signature{
+  display: flex;
+  gap: 10em;
+}
+
+.label-field-container{
+  display: flex;
+  gap: 0.5em;
 }
