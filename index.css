@@ -12,22 +12,36 @@ h6{
   background-color: grey;
   gap: 1em;
   width: 100%;
+  flex-wrap: wrap;
 }
 
-.col-4{
+.column-4{
   display: flex;
   flex-direction: column;
   gap: 2em;
   background-color: pink;
   padding: 20px;
-  width: 320px
+  width: 8.5in;
+}
+
+@media (min-width: 768px) {
+    .column-4{
+        padding: 20px 90px 20px 90px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .column-4{
+        padding: 20px;
+    }
 }
 
 .form-container{
   display: flex;
   flex-direction: column;
   background-color: white;
-  align-items: baseline;
+  gap: 1em;
+  ;
 }
 
 .checkbox-label{
