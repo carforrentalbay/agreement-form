@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agreement Form Generator</title>
+  
+  <link rel="stylesheet" href="index.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+  <div class="main-container">
+    
+    <form>
+      <div class="form-container">
+
+      <input type="date" id="agreement-date-form">
+      <input type="text" id="client-name" placeholder="Renter's Name">
+      <input type="text" id="client-address" placeholder="Renter's Address">
+      <select name="unit-selection" id="unit">
+        <option value="fortuner">Toyota Fortuner</option>
+      </select>
+      <input type="datetime-local" name="start-datetime" id="rental-start-datetime">
+      <input type="datetime-local" name="end-datetime" id="rental-end-datetime">
+      <input type="text" id="destination" placeholder="Renter's Destination">
+
+      </div> 
+    </form>
+    <div class="pdf-container" id="agreement-form">
+      <h6 class="header-center">CAR FOR RENT ALBAY RENTAL AGREEMENT</h6>
+    </div>
+
+  </div>
+<button onclick="download_pdf();">print</button>
+
+
+  <script src="index.js"></script>
+  
+</body>
+
+  
+
+</html>
