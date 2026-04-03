@@ -19,6 +19,34 @@ function download_pdf(){
   html2pdf().set(opt).from(pdf).save();
 }
 
+function print_pdf() {
+  const element = document.getElementById("agreement-form");
+  
+  const opt = {
+    margin: 0,
+    filename: 'Rental_Agreement.pdf',
+    image: {type: 'jpeg', quality: 0.98},
+    html2canvas:{
+      scale: 2,
+      useCORS: true,
+      scrollY: 0,
+      scrollX: 0,
+    },
+    jsPDF: {unit:'in', format:[8.5, 13], orientation: 'portrait'}
+  }
+
+  html2pdf().set(opt).from(element).toPdf().get('pdf').then(function (pdf) {
+    window.open(pdf.output('bloburl'), '_blank').print();
+  });
+}
+
+//change every update
+var allInputs = document.querySelectorAll("input, select, textarea");
+
+for (var i = 0; i < allInputs.length; i++) {
+    allInputs[i].addEventListener("input", update);
+}
+
 //functions
 function update(){
   let rentalAgreementPDF = document.getElementById("agreement-form");
@@ -31,7 +59,7 @@ function update(){
   let startDate = formatDateTime(document.getElementById("rental-start-datetime").value);
   let endDate = formatDateTime(document.getElementById("rental-end-datetime").value);
   let destination = document.getElementById("destination").value;
-  let isAutofill = document.getElementById("autofill").value;
+  let isAutofill = document.getElementById("autofill").checked;
 
   //fields init
   let displayAgreementDate = document.getElementById("display-date");
@@ -72,6 +100,13 @@ function update(){
     displayYear.innerHTML = selectedCar.year || "____________";
     displayColor.innerHTML = selectedCar.color || "____________";
   }
+  else{
+    displayMake.innerHTML = "____________";
+    displayModel.innerHTML = "____________";
+    displayPlate.innerHTML = "____________";
+    displayYear.innerHTML = "____________";
+    displayColor.innerHTML = "____________";
+  }
 
 
   //--rental period--
@@ -81,10 +116,10 @@ function update(){
 
   //--autofill--
   if (isAutofill){
-    signOwnername.innerHTML = ownerName || "_____________________";
+    signOwnername.innerHTML = ownerName;
     signOwnername.style.textDecoration = "underline";
 
-    signAgreementDate.innerHTML = agreementDate || "_____________________";
+    signAgreementDate.innerHTML = agreementDate;
     signAgreementDate.style.textDecoration = "underline";
   }
   else{

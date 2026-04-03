@@ -11,35 +11,90 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
+  <div class="title">
+    <h2 class="mb-4">Rental Agreement Form Generator</h2>
+    <p class="blockquote-footer mb-4">"Yain su pirmahan"</p>
+  </div>
   <div class="main-container">
     <div class="column-4">
     <div>
       <form>
         <div class="form-container">
   
-          <input type="date" id="agreement-date-form">
-          <input type="text" id="renter-name" placeholder="Renter's Name">
-          <input type="text" id="renter-address" placeholder="Renter's Address">
-          <select name="unit-selection" id="rental-vehicle">
-            <option value="">-- Select a Vehicle --</option>
-          </select>
-          <input type="datetime-local" name="start-datetime" id="rental-start-datetime">
-          <input type="datetime-local" name="end-datetime" id="rental-end-datetime">
-          <input type="text" id="destination" placeholder="Renter's Destination">
+          <!-- AGREEMENT DATE -->
+          <div class="form-category">
+            <div class="icon-label">
+              <i class="bi bi-calendar-event"></i>
+              <p class="category-label">Agreement Date<p>
+            </div>
+            <label for="agreement-date-form" class="form-label">Date of Agreement</label>
+            <input class="form-control" type="date" id="agreement-date-form" name="agreementDate">
+          </div>
 
+          <!-- CLIENT INFORMATION -->
 
-          <div class="checkbox-label">
-            <input type="checkbox" name="sign" id="autofill">
-            <label for="sign">Autofill Signature</label>
+          <div class="form-category">
+            <div class="icon-label">
+              <i class="bi bi-person"></i>
+              <p class="category-label">Client Information<p>
+            </div>
+            <label for="renter-name" class="form-label">Renter's Full Name</label>
+            <input class="form-control mb-3" name="renterName" type="text" id="renter-name" placeholder="Who's Renting?">
+
+            <label for="renter-address" class="form-label">Renter's Address</label>
+            <input class="form-control" name="renterAddress" type="text" id="renter-address" placeholder="Renter's Address">
+          </div>
+
+          <!-- UNIT INFO -->
+          <div class="form-category">
+            <div class="icon-label">
+              <i class="bi bi-car-front-fill"></i>
+              <p class="category-label">Vehicle Information<p>
+            </div>
+            <select class="form-select" name="unit-selection" id="rental-vehicle">
+              <option value="">-- Select a Vehicle --</option>
+            </select>
+          </div>
+          
+          <!-- RENTAL PERIOD -->
+          <div class="form-category">
+            <div class="icon-label">
+              <i class="bi bi-calendar2-event"></i>
+              <p class="category-label">Rental Period<p>
+            </div>
+            <div class="row g-3">
+              <div class="col">
+                <label for="rental-start-datetime" class="form-label">Start Date</label>
+                <input class="form-control mb-3" type="datetime-local" name="start-datetime" id="rental-start-datetime">
+              </div>
+  
+              <div class="col">
+                <label for="rental-end-datetime" class="form-label">End Date</label>
+                <input class="form-control mb-3" type="datetime-local" name="end-datetime" id="rental-end-datetime">
+              </div>
+            </div>
+
+            <label for="destination" class="form-label"><i class="bi bi-geo-alt"></i> Destination</label>
+            <input class="form-control" type="text" id="destination" placeholder="Renter's Destination">
+          </div>
+
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="autofill" unchecked>
+            <label class="form-check-label" for="switchCheckChecked">Autofill Signature (work in progress)</label>
           </div>
         </div> 
       </form>
     </div>
-    <button class="btn-print" onclick="update();">update</button>
-    <button class="btn-print" onclick="download_pdf();">print</button>
+    <div class="button-group">
+      <button class="btn btn-primary flex-grow-1" onclick="print_pdf();"><i class="bi bi-printer"></i> Print Agreement Form</button>
+      <button class="btn btn-outline-secondary flex-grow-2" onclick="download_pdf();"><i class="bi bi-download"></i> Save PDF </button>
+    </div>
+
     </div>
 
     <div class="pdf-container" id="agreement-form">
