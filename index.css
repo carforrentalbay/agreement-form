@@ -126,7 +126,7 @@ h6{
   background-color: white;
   font-family: 'Times New Roman', Times, serif;
   width: 8.5in;
-  height: 16in;
+  height: 14in;
   padding: 0.3in;
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
   overflow: hidden;
@@ -136,7 +136,7 @@ h6{
 
 .pdf-container p{
   margin: 0 0 1.15 0;
-  line-height: 1.15;
+  line-height: 1.55;
   font-size: 14.67px;
 }
 
