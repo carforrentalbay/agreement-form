@@ -13,7 +13,7 @@ function download_pdf(){
       scrollY: 0,
       scrollX: 0,
     },
-    jsPDF: {unit:'in', format:[8.5, 14], orientation: 'portrait'}
+    jsPDF: {unit:'in', format:[8.5, 16], orientation: 'portrait'}
   }
 
   html2pdf().set(opt).from(pdf).save();
@@ -32,7 +32,7 @@ function print_pdf() {
       scrollY: 0,
       scrollX: 0,
     },
-    jsPDF: {unit:'in', format:[8.5, 14], orientation: 'portrait'}
+    jsPDF: {unit:'in', format:[8.5, 16], orientation: 'portrait'}
   }
 
   html2pdf().set(opt).from(element).toPdf().get('pdf').then(function (pdf) {
