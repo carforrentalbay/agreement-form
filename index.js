@@ -56,8 +56,8 @@ function update(){
   let agreementDate = formatDate(document.getElementById("agreement-date-form").value);
   let renterName = document.getElementById("renter-name").value;
   let renterAddress = document.getElementById("renter-address").value;
-  let startDate = formatDateTime(document.getElementById("rental-start-datetime").value);
-  let endDate = formatDateTime(document.getElementById("rental-end-datetime").value);
+  let startDate = document.getElementById("rental-start-datetime").value;
+  let endDate = document.getElementById("rental-end-datetime").value;
   let destination = document.getElementById("destination").value;
   let isAutofill = document.getElementById("autofill").checked;
 
@@ -110,9 +110,13 @@ function update(){
 
 
   //--rental period--
-  displayStartDate.innerHTML = startDate || "____________";
-  displayEndDate.innerHTML = endDate || "____________";
+  displayStartDate.innerHTML = formatDateTime(startDate) || "____________";
+
+  displayEndDate.innerHTML = formatDateTime(endDate) || "____________";
+  
   displayDestination.innerHTML = destination || "____________";
+
+
 
   //--autofill--
   if (isAutofill){
@@ -125,7 +129,43 @@ function update(){
   else{
     signOwnername.innerHTML = "_____________________";
     signAgreementDate.innerHTML = "_____________________";
+    signOwnername.style.textDecoration = "none";
+    signAgreementDate.style.textDecoration = "none";
   }
+}
+
+document.getElementById("rental-start-datetime").addEventListener("change", function() {
+    if (this.value) {
+        let date = new Date(this.value);
+        
+        // Add 1 day
+        date.setDate(date.getDate() + 1);
+        
+        // Format it for the input field (YYYY-MM-DDTHH:mm)
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        
+        //js .getMonth() starts counting at 0 so month gets a +1
+        //padStart: 2 = 02, 3 = 003
+
+        let nextDayString = `${year}-${month}-${day}T${hours}:${minutes}`;
+        
+        document.getElementById("rental-end-datetime").value = nextDayString;
+        
+        update();
+    }
+});
+
+function dateToInputString(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
 }
 
 function formatDate(dateString) {

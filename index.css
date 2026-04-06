@@ -6,7 +6,7 @@ body{
 }
 
 h6{
-  font-size: 14.67px;
+  font-size: 11pt;
 }
 
 .title{
@@ -18,6 +18,13 @@ h6{
   height: 100%;
   background-color: #f0f0f0;
   color: #0d6efd;;
+}
+
+.version{
+    font-size: 14px;
+    font-weight: 600;
+    color: #495057;
+    margin-top: 0px;
 }
 
 .form-category{
@@ -95,7 +102,7 @@ h6{
 
 @media (min-width: 400px) {
     .column-4{
-        padding: 20px 90px 20px 90px;
+        padding: 20px 40px 20px 40px;
     }
 }
 
@@ -130,13 +137,15 @@ h6{
   padding: 0.3in;
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
   overflow: hidden;
-  font-size: 14.67px;
+  font-size: 11pt;
   border-radius: 12px;
+  line-height: 1.15;
 }
 
 .pdf-container p{
   line-height: 1.30;
   font-size: 14.67px;
+  margin-bottom: 10pt;
 }
 
 .pdf-container h6{
@@ -147,12 +156,13 @@ h6{
   text-align: center;
   font-weight: bold;
   text-decoration: underline;
+  margin-bottom: 0px;
 }
 
 .header{
   font-weight: bold;
   text-decoration: underline;
-  margin: 0 0 16px 0;
+  margin: 0 0 8pt 0;
 }
 
 .header-sign{
