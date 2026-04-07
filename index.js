@@ -47,6 +47,7 @@ for (var i = 0; i < allInputs.length; i++) {
     allInputs[i].addEventListener("input", update);
 }
 
+
 //functions
 function update(){
   let rentalAgreementPDF = document.getElementById("agreement-form");
@@ -60,6 +61,7 @@ function update(){
   let endDate = document.getElementById("rental-end-datetime").value;
   let destination = document.getElementById("destination").value;
   let isAutofill = document.getElementById("autofill").checked;
+  let isCDW = document.getElementById("cdw").checked;
 
   //fields init
   let displayAgreementDate = document.getElementById("display-date");
@@ -76,6 +78,9 @@ function update(){
 
   let signOwnername = document.getElementById("sign-owner-name");
   let signAgreementDate = document.getElementById("sign-agreement-date");
+
+  let displayCDW = document.getElementById("damage-or-loss");
+  let btnSaveCWD = document.getElementById("btnSaveCWD");
 
   //injection
   //--agreement bw--
@@ -131,6 +136,18 @@ function update(){
     signAgreementDate.innerHTML = "_____________________";
     signOwnername.style.textDecoration = "none";
     signAgreementDate.style.textDecoration = "none";
+  }
+
+  //CDW
+  if (isCDW){
+    btnSaveCWD.style.display = "block";
+    
+    displayCDW.innerHTML = ("As permitted given the extent of the law, The Renter will only be responsible for risk of theft, damage, loss, or destruction of the Vehicle from any and every cause if upon investigation, if proven that the accident or damage was caused by the Renter's misuse, abuse, negligence or intentional act to damage the Owner's vehicle otherwise the Renter is freed of any financial responsibility for any collision damages. If while in the Renter's possession the Vehicle becomes damaged, the Collision Damage Waiver will cover any accident, vandalization, etc. including any damages from the car while parked. CDW however does not cover damages to other cars, bodily injury to other people, injuries to the Renter and the passengers, theft or damage to the Renter's personal items on the vehicle.")
+  }
+  else{
+    btnSaveCWD.style.display = "none";
+
+    displayCDW.innerHTML = ("The Renter will be responsible for risk of theft, damage, loss, or destruction of the Vehicle from any and every cause. If while in the Renter's possession the Vehicle becomes damaged, the Renter agrees to pay for any and all costs of repair, up to the current value of the Vehicle. If while in the Renter's possession, the Vehicle becomes lost, the Renter agrees to pay the Owner its current value. For minor scratches, the Renter will not pay for the damages. For deep scratches and dents, the Renter agrees to pay 5,000 pesos per panel and 2,000 pesos per day while the car is being fixed. For tire damages, the Renter agrees to replace the damaged tire. For major damages, the insurance will cover the damages but the Renter will pay the insurance participation fee and 1,500 pesos per day loss of income while car is being fixed. For total wreck damages or total loss, the Renter agrees to pay the Owner its current value of the Vehicle and agrees to pay for the towing services.")
   }
 }
 

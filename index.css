@@ -143,26 +143,27 @@ h6{
 }
 
 .pdf-container p{
-  line-height: 1.30;
-  font-size: 14.67px;
-  margin-bottom: 10pt;
+  line-height: 1.15;
+  font-size: 11pt;
+  margin-bottom: 18pt;
 }
 
 .pdf-container h6{
-  font-size: 14.67px;
+  font-size: 11pt;
 }
 
 .header-center{
   text-align: center;
   font-weight: bold;
   text-decoration: underline;
-  margin-bottom: 0px;
+  margin-bottom: 10pt;
+  margin-top: 10pt;
 }
 
 .header{
   font-weight: bold;
   text-decoration: underline;
-  margin: 0 0 8pt 0;
+  margin: 0 0 11pt 0;
 }
 
 .header-sign{
@@ -212,4 +213,33 @@ h6{
 .button-group{
   display: flex;
   gap: 1em;
+}
+
+.size-debug{
+  position: relative;
+}
+
+.line-debug{
+  position: absolute;
+  top: 13in;
+}
+
+/* .sign-label{
+  margin-bottom: 100px;
+  fontsi
+} */
+
+.label-container p{
+  line-height: 1;
+  margin-bottom: 15pt;
+}
+
+.field-container p{
+  line-height: 1;
+  margin-bottom: 15pt;
+}
+
+#btnSaveCWD {
+    display: none;
+
 }
