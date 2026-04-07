@@ -1,11 +1,24 @@
 //print
+let renterName = document.getElementById("renter-name").value;
+let selectedCar = null;
+let displayModel = document.getElementById("display-model");
+
 function download_pdf(){
   const pdf = document.getElementById("agreement-form");
   pdf.style.boxShadow = "none";
 
+  let dynamicFileName = null;
+
+  if (renterName && selectedCar){
+    dynamicFileName = `${renterName} (${selectedCar.model}) Rental-Agreement.pdf`;
+  }
+  else
+    dynamicFileName = `Rental-Agreement.pdf`;
+  
   const opt = {
     margin: 0,
-    filename: 'Rental_Agreement.pdf',
+    // if (renterName && displayModel)
+    filename: dynamicFileName,
     image: {type: 'jpeg', quality: 0.98},
     html2canvas:{
       scale: 2,
@@ -22,9 +35,17 @@ function download_pdf(){
 function print_pdf() {
   const element = document.getElementById("agreement-form");
   
+  let dynamicFileName = null;
+
+  if (renterName && selectedCar){
+    dynamicFileName = `${renterName} (${selectedCar.model}) Rental-Agreement.pdf`;
+  }
+  else
+    dynamicFileName = `Rental-Agreement.pdf`;
+
   const opt = {
     margin: 0,
-    filename: 'Rental_Agreement.pdf',
+    filename: dynamicFileName,
     image: {type: 'jpeg', quality: 0.98},
     html2canvas:{
       scale: 2,
@@ -38,6 +59,34 @@ function print_pdf() {
   html2pdf().set(opt).from(element).toPdf().get('pdf').then(function (pdf) {
     window.open(pdf.output('bloburl'), '_blank').print();
   });
+}
+
+function print_cdw(){
+  const pdf = document.getElementById("cdw-form");
+  pdf.style.boxShadow = "none";
+
+  let dynamicFileName = null;
+
+  if (renterName && selectedCar){
+    dynamicFileName = `${renterName} (${selectedCar.model}) Rental-Agreement.pdf`;
+  }
+  else
+    dynamicFileName = `CDW.pdf`;
+
+  const opt = {
+    margin: 0,
+    filename: dynamicFileName,
+    image: {type: 'jpeg', quality: 0.98},
+    html2canvas:{
+      scale: 2,
+      useCORS: true,
+      scrollY: 0,
+      scrollX: 0,
+    },
+    jsPDF: {unit:'in', format:[8.5, 14], orientation: 'portrait'}
+  }
+
+  html2pdf().set(opt).from(pdf).save();
 }
 
 //change every update
@@ -55,7 +104,7 @@ function update(){
   //variables init
   let ownerName = "ANGELYN M. DADO";
   let agreementDate = formatDate(document.getElementById("agreement-date-form").value);
-  let renterName = document.getElementById("renter-name").value;
+  renterName = document.getElementById("renter-name").value;
   let renterAddress = document.getElementById("renter-address").value;
   let startDate = document.getElementById("rental-start-datetime").value;
   let endDate = document.getElementById("rental-end-datetime").value;
@@ -63,12 +112,12 @@ function update(){
   let isAutofill = document.getElementById("autofill").checked;
   let isCDW = document.getElementById("cdw").checked;
 
-  //fields init
+  //agreement fields init
   let displayAgreementDate = document.getElementById("display-date");
   let displayRenterName = document.getElementById("renter-name-display");
   let displayRenterAddress = document.getElementById("renter-address-display");
   let displayMake = document.getElementById("display-make");
-  let displayModel = document.getElementById("display-model");
+  displayModel = document.getElementById("display-model");
   let displayPlate= document.getElementById("display-plate-number");
   let displayYear= document.getElementById("display-year");
   let displayColor = document.getElementById("display-color");
@@ -82,6 +131,17 @@ function update(){
   let displayCDW = document.getElementById("damage-or-loss");
   let btnSaveCWD = document.getElementById("btnSaveCWD");
 
+  //cdw fields init
+  let displayAgreementDateCDW = document.getElementById("display-date-cdw");
+  let displayRenterNameCDW = document.getElementById("renter-name-display-cdw");
+  let displayMakeCDW = document.getElementById("display-make-cdw");
+  let displayModelCDW = document.getElementById("display-model-cdw");
+  let displayPlateCDW= document.getElementById("display-plate-number-cdw");
+  let displayYearCDW= document.getElementById("display-year-cdw");
+  let displayColorCDW = document.getElementById("display-color-cdw");
+  let displayStartDateCDW = document.getElementById("display-start-date-cdw");
+  let displayEndDateCDW = document.getElementById("display-end-date-cdw");
+
   //injection
   //--agreement bw--
   displayAgreementDate.innerHTML = agreementDate || "____________";
@@ -91,7 +151,7 @@ function update(){
   //--rental vehicle--
 
   let selectedID = document.getElementById("rental-vehicle").value;
-  let selectedCar = null;
+  selectedCar = null;
   for (let i = 0; i<fleet.length; i++){
     if (fleet[i].id === selectedID){
       selectedCar = fleet[i];
@@ -138,17 +198,52 @@ function update(){
     signAgreementDate.style.textDecoration = "none";
   }
 
+  
+
   //CDW
   if (isCDW){
     btnSaveCWD.style.display = "block";
-    
+    document.getElementById("mainCDWContainer").style.display="block";
+
     displayCDW.innerHTML = ("As permitted given the extent of the law, The Renter will only be responsible for risk of theft, damage, loss, or destruction of the Vehicle from any and every cause if upon investigation, if proven that the accident or damage was caused by the Renter's misuse, abuse, negligence or intentional act to damage the Owner's vehicle otherwise the Renter is freed of any financial responsibility for any collision damages. If while in the Renter's possession the Vehicle becomes damaged, the Collision Damage Waiver will cover any accident, vandalization, etc. including any damages from the car while parked. CDW however does not cover damages to other cars, bodily injury to other people, injuries to the Renter and the passengers, theft or damage to the Renter's personal items on the vehicle.")
   }
   else{
     btnSaveCWD.style.display = "none";
+    document.getElementById("mainCDWContainer").style.display="none";
 
     displayCDW.innerHTML = ("The Renter will be responsible for risk of theft, damage, loss, or destruction of the Vehicle from any and every cause. If while in the Renter's possession the Vehicle becomes damaged, the Renter agrees to pay for any and all costs of repair, up to the current value of the Vehicle. If while in the Renter's possession, the Vehicle becomes lost, the Renter agrees to pay the Owner its current value. For minor scratches, the Renter will not pay for the damages. For deep scratches and dents, the Renter agrees to pay 5,000 pesos per panel and 2,000 pesos per day while the car is being fixed. For tire damages, the Renter agrees to replace the damaged tire. For major damages, the insurance will cover the damages but the Renter will pay the insurance participation fee and 1,500 pesos per day loss of income while car is being fixed. For total wreck damages or total loss, the Renter agrees to pay the Owner its current value of the Vehicle and agrees to pay for the towing services.")
   }
+
+  //   let displayAgreementDateCDW = document.getElementById("display-date-cdw");
+  // let displayRenterNameCDW = document.getElementById("renter-name-display-cdw");
+  // let displayMakeCDW = document.getElementById("display-make-cdw");
+  // let displayModelCDW = document.getElementById("display-model-cdw");
+  // let displayPlateCDW= document.getElementById("display-plate-number-cdw");
+  // let displayYearCDW= document.getElementById("display-year-cdw");
+  // let displayColorCDW = document.getElementById("display-color-cdw");
+  // let displayStartDateCDW = document.getElementById("display-start-date-cdw");
+  // let displayEndDateCDW = document.getElementById("display-end-date-cdw");
+
+  displayAgreementDateCDW.innerHTML = agreementDate || "____________";
+  displayRenterNameCDW.innerHTML = renterName || "____________";
+
+  if (selectedCar !== null){
+    displayMakeCDW.innerHTML = selectedCar.make || "____________";
+    displayModelCDW.innerHTML = selectedCar.model || "____________";
+    displayPlateCDW.innerHTML = selectedCar.plate || "____________";
+    displayYearCDW.innerHTML = selectedCar.year || "____________";
+    displayColorCDW.innerHTML = selectedCar.color || "____________";
+  }
+  else{
+    displayMakeCDW.innerHTML = "____________";
+    displayModelCDW.innerHTML = "____________";
+    displayPlateCDW.innerHTML = "____________";
+    displayYearCDW.innerHTML = "____________";
+    displayColorCDW.innerHTML = "____________";
+  }
+  displayStartDateCDW.innerHTML = formatDateTimeCDW(startDate) || "____________";
+
+  displayEndDateCDW.innerHTML = formatDateTimeCDW(endDate) || "____________";
 }
 
 document.getElementById("rental-start-datetime").addEventListener("change", function() {
@@ -176,14 +271,14 @@ document.getElementById("rental-start-datetime").addEventListener("change", func
     }
 });
 
-function dateToInputString(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    return `${year}-${month}-${day}T${hours}:${minutes}`;
-}
+// function dateToInputString(date) {
+//     const year = date.getFullYear();
+//     const month = String(date.getMonth() + 1).padStart(2, '0');
+//     const day = String(date.getDate()).padStart(2, '0');
+//     const hours = String(date.getHours()).padStart(2, '0');
+//     const minutes = String(date.getMinutes()).padStart(2, '0');
+//     return `${year}-${month}-${day}T${hours}:${minutes}`;
+// }
 
 function formatDate(dateString) {
     if (!dateString) return "____________";
@@ -212,6 +307,22 @@ function formatDateTime(dateTimeString) {
     const formattedTime = dateObj.toLocaleTimeString('en-US', timeOptions);
 
     return `${formattedDate}  &ensp; ${formattedTime}`;
+}
+
+function formatDateTimeCDW(dateTimeString) {
+    if (!dateTimeString) return "____________";
+
+    const dateObj = new Date(dateTimeString);
+
+    // Format the Date: April 3, 2026
+    const dateOptions = { month: 'long', day: 'numeric', year: 'numeric' };
+    const formattedDate = dateObj.toLocaleDateString('en-US', dateOptions);
+
+    // Format the Time: 2:30 PM
+    const timeOptions = { hour: 'numeric', minute: '2-digit', hour12: true };
+    const formattedTime = dateObj.toLocaleTimeString('en-US', timeOptions);
+
+    return `${formattedDate}  &ensp; Time: ${formattedTime}`;
 }
 
 //UNIT DATABASE

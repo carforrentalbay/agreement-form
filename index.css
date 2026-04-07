@@ -5,10 +5,6 @@ body{
   align-items: center;
 }
 
-h6{
-  font-size: 11pt;
-}
-
 .title{
   padding-top: 30px;
   display: flex;
@@ -222,6 +218,7 @@ h6{
 .line-debug{
   position: absolute;
   top: 13in;
+  display: none; /*toggle*/
 }
 
 /* .sign-label{
@@ -242,4 +239,87 @@ h6{
 #btnSaveCWD {
     display: none;
 
+}
+
+.main-cdw-container{
+  margin-top: 24px;
+  display: none;
+}
+
+/* cdw */
+
+.header-center-cdw{
+  text-align: center;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 1.5em;
+  margin-top: 0.7in;
+}
+
+.main-cdw-container .header-center-cdw{
+  font-size:  16pt;
+}
+
+.pdf-container-cdw {
+  background-color: white;
+  font-family: 'Times New Roman', Times, serif;
+  width: 8.5in;
+  height: 14in;
+  padding: 0.5in 0.7in 0.5in 0.7in;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+  overflow: hidden;
+  font-size: 11pt;
+  border-radius: 12px;
+  line-height: 1.15;
+}
+
+.pdf-container-cdw .header-center-cdw{
+  font-size: 16pt;
+}
+
+.pdf-container-cdw p{
+  line-height: 1.30;
+  font-size: 11pt;
+  margin-bottom: 18pt;
+}
+
+.pdf-container-cdw h6{
+  font-size: 11pt;
+}
+
+.pdf-container-cdw li{
+  line-height: 1.20;
+}
+
+.header-logo-container{
+  /* background-color: pink; */
+  position: relative;
+  margin-top: 50px;
+}
+
+.img-cfra-logo{
+  width: 3.84in;
+  object-fit: fill;
+  width: 3.84in;
+  height: 0.78in;
+  position: absolute;
+  top: 20px;
+  right: 250px;
+}
+
+.heading-cfra-text{
+  font-family: 'Calibri';
+  margin-top: 60px;
+  font-size: 16pt;
+  font-weight: bold;
+}
+
+.heading-cfra-address{
+  font-family: 'Calibri';
+  font-size: 14pt;
+}
+
+.TOS{
+  font-weight: bold;
+  margin-bottom: 1.5em;
 }

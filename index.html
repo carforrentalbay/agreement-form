@@ -106,7 +106,7 @@
     <div class="button-group">
       <button class="btn btn-primary flex-grow-1" onclick="print_pdf();" id="btnPrintAgreement"><i class="bi bi-printer"></i> Print Agreement Form</button>
       <button class="btn btn-outline-secondary flex-grow-2" onclick="download_pdf();"><i class="bi bi-download"></i> Save PDF </button>
-      <button class="btn btn-outline-secondary pt-1 pb-1" id="btnSaveCWD"><i class="bi bi-download"></i> Save CWD</button>
+      <button class="btn btn-outline-secondary pt-1 pb-1" onclick="print_cdw();" id="btnSaveCWD"><i class="bi bi-download"></i> Save CWD</button>
     </div>
 
     </div>
@@ -209,9 +209,106 @@
               </div>
             </div> 
           </div> 
-      </div>
-    </div>    
+        </div>
+      </div>    
 
+      <!-- cdw section -->
+
+      <div class="main-cdw-container" id="mainCDWContainer">
+        <div class="size-debug">
+        <div class="line-debug">---</div>
+          <div class="pdf-container-cdw" id="cdw-form">
+            <div class="heading-cfra-logo text-center"><img class="img-cfra-logo" src="CFRA-cdw-logo.png" alt="Car For Rent Albay Logo"></div>
+            <div class="header-logo-container">
+
+              <div class="heading-cfra-text text-center">CAR FOR RENT ALBAY</div>
+              <div class="heading-cfra-address text-center">1384 Zone 4, Bitano, Legazpi City, Albay, 4500</div>
+            </div>
+            <h6 class="header-center-cdw">
+              COLLISION DAMAGE WAIVER
+            </h6>
+            <br>
+            <p>This Collision Damage Waiver (“Waiver”) has been signed this <span id="display-date-cdw">____________</span> by <span id="renter-name-display-cdw">____________</span> (“Renter”), who acknowledges and agrees to the rental information and terms provided below:</p>
+      
+            <h6 class="header">Rental Vehicle</h6>
+      
+            <div class="vehicle-info-grid">
+            <div class="grid-item">Make: <span id="display-make-cdw">____________</span></div>
+            <div class="grid-item">Model: <span id="display-model-cdw">____________</span></div>
+            <div class="grid-item">Plate Number: <span id="display-plate-number-cdw">____________</span></div>
+            
+            <div class="grid-item">Year: <span id="display-year-cdw">____________</span></div>
+            <div class="grid-item">Color: <span id="display-color-cdw">____________</span></div>
+            <div class="grid-item"></div> </div>
+      
+            <h6 class="header">Rental Period</h6>
+      
+            <p>
+              Start Date: &nbsp;<span id="display-start-date-cdw">____________</span>&emsp;&emsp;
+              End Date: &nbsp;<span id="display-end-date-cdw">____________</span>&emsp;&emsp;   
+
+            </p>
+      
+            <h6 class="TOS">TERMS AND CONDITIONS</h6>
+            <!-- <p>
+              1.	This waiver covers any collision damage made to the rented vehicle stated above during its rental dates under normal working conditions.
+              <br><br>
+              2.	Upon investigation, if proven that the accident was caused by the Renter’s misuse, abuse, negligence, or intentional act to damage the Owner’s vehicle by collision, an additional 20% charge will be automatically added to the agreed-upon rental fee once the waiver is executed.
+              <br><br>
+              3.	The Renter is freed of any financial responsibility for any collision damages, provided that the Renter used the rented vehicle according to the terms and conditions of the Vehicle Rental Agreement.
+              <br><br>
+              4.	This waiver however does not cover damages to other cars, bodily injury to other people, injuries to the Renter and the passengers, theft or damage to the Renter’s personal items on the vehicle.
+
+            </p> -->
+            <ol>
+              <li>This waiver covers any collision damage made to the rented vehicle stated above during its rental dates under normal working conditions.</li>
+              <br>
+              <li>Upon investigation, if proven that the accident was caused by the Renter’s misuse, abuse, negligence, or intentional act to damage the Owner’s vehicle by collision, an additional 20% charge will be automatically added to the agreed-upon rental fee once the waiver is executed.</li>
+              <br>
+              <li>The Renter is freed of any financial responsibility for any collision damages, provided that the Renter used the rented vehicle according to the terms and conditions of the Vehicle Rental Agreement.</li>
+              <br>
+              <li>This waiver however does not cover damages to other cars, bodily injury to other people, injuries to the Renter and the passengers, theft or damage to the Renter’s personal items on the vehicle.</li>
+            </ol>
+            
+      
+            <br><br><br><br><br>
+      
+            <div class="owner-renter-signature">
+              <div class="signature-main-container">
+                <h6 class="header-sign">OWNER</h6>
+                <div class="label-field-container">
+                  <div class="label-container">
+                    <p class="sign-label">Name:</p>
+                    <p class="sign-label">Signed:</p>
+                    <p class="sign-label">Date:</p>
+                  </div>
+                  <div class="field-container">
+                    <p id="sign-owner-name">_____________________ </p>
+                    <p id="sign-owner-signature">_____________________ </p>
+                    <p id="sign-agreement-date">_____________________ </p>              
+                  </div>
+                </div>
+              </div>
+        
+              <div class="signature-main-container">
+                <h6 class="header-sign">RENTER</h6>
+                <div class="label-field-container">
+                  <div class="label-container">
+                    <p class="sign-label">Name:</p>
+                    <p class="sign-label">Signed:</p>
+                    <p class="sign-label">Date:</p>
+                  </div>
+                  <div class="field-container">
+                    <p id="sign-renter-name">_____________________ </p>
+                    <p>_____________________ </p>
+                    <p id="sign-agreement-date">_____________________ </p>            
+                  </div>
+                </div>
+              </div> 
+            </div> 
+          </div>
+        </div>         
+      </div>
     </div>
 
   </div>
