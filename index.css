@@ -95,8 +95,8 @@ body{
   display: flex;
   flex-direction: column;
   gap: 1em;
-  background-color: #f0f0f0;//this
-  padding: 20px;
+  /* background-color: #f0f0f0; */
+  /* padding: 20px; */
   width: 8.5in;
 }
 

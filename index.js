@@ -4,6 +4,7 @@ let selectedCar = null;
 let displayModel = document.getElementById("display-model");
 
 function download_pdf(){
+  window.scrollTo(0, 0);
   const pdf = document.getElementById("agreement-form");
   pdf.style.boxShadow = "none";
 
@@ -33,6 +34,7 @@ function download_pdf(){
 }
 
 function print_pdf() {
+  window.scrollTo(0, 0);
   const element = document.getElementById("agreement-form");
   
   let dynamicFileName = null;
@@ -62,13 +64,14 @@ function print_pdf() {
 }
 
 function print_cdw(){
+  window.scrollTo(0, 0);
   const pdf = document.getElementById("cdw-form");
   pdf.style.boxShadow = "none";
 
   let dynamicFileName = null;
 
   if (renterName && selectedCar){
-    dynamicFileName = `${renterName} (${selectedCar.model}) Rental-Agreement.pdf`;
+    dynamicFileName = `${renterName} (${selectedCar.model}) CDW.pdf`;
   }
   else
     dynamicFileName = `CDW.pdf`;
