@@ -328,3 +328,24 @@ body{
   margin-bottom: 1.5em;
 }
 
+#agreement-form, #cdw-form, #agreement-form {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+/* WRAPPER VIEW FOR DYNAMIC FIT ON SMALLER DEVICES */
+/* The 'Window' the user sees on their phone */
+.pdf-preview-viewport {
+    width: 100%;
+    overflow: hidden; /* Prevents horizontal scroll */
+    display: flex;
+    justify-content: center; /* Centers the document */
+    background-color: #f0f0f0;
+}
+
+/* The actual document */
+.pdf-container, .pdf-container-cdw {
+    transform-origin: top center; /* Scale from the top-middle */
+    transition: transform 0.2s ease; /* Smooth transition when resizing */
+    margin-bottom: 20px;
+}

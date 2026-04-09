@@ -4,8 +4,18 @@ let selectedCar = null;
 let displayModel = document.getElementById("display-model");
 
 function download_pdf(){
-  window.scrollTo(0, 0);
+  // window.scrollTo(0, 0);
+  
   const pdf = document.getElementById("agreement-form");
+  const wrapper = document.getElementById("pdf-render-wrapper");
+  const clone = pdf.cloneNode(true);
+
+  clone.style.transform = "none";
+  clone.style.boxShadow = "none";
+
+  wrapper.innerHTML = "";
+  wrapper.appendChild(clone);
+
   pdf.style.boxShadow = "none";
 
   let dynamicFileName = null;
@@ -30,12 +40,25 @@ function download_pdf(){
     jsPDF: {unit:'in', format:[8.5, 14], orientation: 'portrait'}
   }
 
-  html2pdf().set(opt).from(pdf).save();
+  try{
+    html2pdf().set(opt).from(clone).save();
+  }finally{
+    wrapper.innerHTML="";
+  }
 }
 
-function print_pdf() {
-  window.scrollTo(0, 0);
+async function print_pdf() {
+  // window.scrollTo(0, 0);
+
   const element = document.getElementById("agreement-form");
+  const wrapper = document.getElementById("pdf-render-wrapper");
+  const clone = element.cloneNode(true);
+
+  clone.style.transform = "none";
+  clone.style.boxShadow = "none";
+
+  wrapper.innerHTML = "";
+  wrapper.appendChild(clone);
   
   let dynamicFileName = null;
 
@@ -58,14 +81,28 @@ function print_pdf() {
     jsPDF: {unit:'in', format:[8.5, 14], orientation: 'portrait'}
   }
 
-  html2pdf().set(opt).from(element).toPdf().get('pdf').then(function (pdf) {
-    window.open(pdf.output('bloburl'), '_blank').print();
-  });
+  try{
+     await html2pdf().set(opt).from(clone).toPdf().get('pdf').then(function (pdf) {
+      window.open(pdf.output('bloburl'), '_blank').print();
+    });
+  } finally{
+    wrapper.innerHTML="";
+  }
 }
 
 function print_cdw(){
-  window.scrollTo(0, 0);
+  // window.scrollTo(0, 0);
   const pdf = document.getElementById("cdw-form");
+  const wrapper = document.getElementById("pdf-render-wrapper");
+  const clone = pdf.cloneNode(true);
+
+  clone.style.transform = "none";
+  clone.style.boxShadow = "none";
+
+  wrapper.innerHTML = "";
+  wrapper.appendChild(clone);
+
+
   pdf.style.boxShadow = "none";
 
   let dynamicFileName = null;
@@ -88,8 +125,11 @@ function print_cdw(){
     },
     jsPDF: {unit:'in', format:[8.5, 14], orientation: 'portrait'}
   }
-
-  html2pdf().set(opt).from(pdf).save();
+  try{
+    html2pdf().set(opt).from(clone).save();
+  }finally{
+    wrapper.innerHTML="";
+  }
 }
 
 //change every update
@@ -217,15 +257,6 @@ function update(){
     displayCDW.innerHTML = ("The Renter will be responsible for risk of theft, damage, loss, or destruction of the Vehicle from any and every cause. If while in the Renter's possession the Vehicle becomes damaged, the Renter agrees to pay for any and all costs of repair, up to the current value of the Vehicle. If while in the Renter's possession, the Vehicle becomes lost, the Renter agrees to pay the Owner its current value. For minor scratches, the Renter will not pay for the damages. For deep scratches and dents, the Renter agrees to pay 5,000 pesos per panel and 2,000 pesos per day while the car is being fixed. For tire damages, the Renter agrees to replace the damaged tire. For major damages, the insurance will cover the damages but the Renter will pay the insurance participation fee and 1,500 pesos per day loss of income while car is being fixed. For total wreck damages or total loss, the Renter agrees to pay the Owner its current value of the Vehicle and agrees to pay for the towing services.")
   }
 
-  //   let displayAgreementDateCDW = document.getElementById("display-date-cdw");
-  // let displayRenterNameCDW = document.getElementById("renter-name-display-cdw");
-  // let displayMakeCDW = document.getElementById("display-make-cdw");
-  // let displayModelCDW = document.getElementById("display-model-cdw");
-  // let displayPlateCDW= document.getElementById("display-plate-number-cdw");
-  // let displayYearCDW= document.getElementById("display-year-cdw");
-  // let displayColorCDW = document.getElementById("display-color-cdw");
-  // let displayStartDateCDW = document.getElementById("display-start-date-cdw");
-  // let displayEndDateCDW = document.getElementById("display-end-date-cdw");
 
   displayAgreementDateCDW.innerHTML = agreementDate || "____________";
   displayRenterNameCDW.innerHTML = renterName || "____________";
@@ -247,6 +278,8 @@ function update(){
   displayStartDateCDW.innerHTML = formatDateTimeCDW(startDate) || "____________";
 
   displayEndDateCDW.innerHTML = formatDateTimeCDW(endDate) || "____________";
+
+  scalePDFPreview();
 }
 
 document.getElementById("rental-start-datetime").addEventListener("change", function() {
@@ -273,15 +306,6 @@ document.getElementById("rental-start-datetime").addEventListener("change", func
         update();
     }
 });
-
-// function dateToInputString(date) {
-//     const year = date.getFullYear();
-//     const month = String(date.getMonth() + 1).padStart(2, '0');
-//     const day = String(date.getDate()).padStart(2, '0');
-//     const hours = String(date.getHours()).padStart(2, '0');
-//     const minutes = String(date.getMinutes()).padStart(2, '0');
-//     return `${year}-${month}-${day}T${hours}:${minutes}`;
-// }
 
 function formatDate(dateString) {
     if (!dateString) return "____________";
@@ -427,3 +451,37 @@ fleet.forEach(car =>{
   option.text = `${car.make} ${car.model} (${car.year})`;
   rentalVehicle.add(option);
 });
+
+function scalePDFPreview() {
+  // Select all potential PDF containers
+  const previews = document.querySelectorAll('.pdf-container, .pdf-container-cdw');
+  
+  const padding = 20; 
+  const screenWidth = window.innerWidth - padding;
+  const pdfWidth = 816; // 8.5 inches at 96 DPI
+
+  previews.forEach(preview => {
+      // Find the specific viewport this preview belongs to
+      const viewport = preview.closest('.pdf-preview-viewport');
+      if (!viewport) return;
+
+      if (screenWidth < pdfWidth) {
+          const scaleFactor = screenWidth / pdfWidth;
+          
+          // Apply scale to the preview
+          preview.style.transform = `scale(${scaleFactor})`;
+          
+          // Adjust the parent viewport height so there isn't massive empty space
+          // (scale() doesn't collapse the original space taken by the element)
+          viewport.style.height = (preview.offsetHeight * scaleFactor) + "px";
+      } else {
+          // Reset for desktop
+          preview.style.transform = "scale(1)";
+          viewport.style.height = "auto";
+      }
+  });
+}
+
+
+window.addEventListener('resize', scalePDFPreview);
+window.addEventListener('load', scalePDFPreview);
