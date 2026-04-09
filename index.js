@@ -56,6 +56,9 @@ async function print_pdf() {
 
   clone.style.transform = "none";
   clone.style.boxShadow = "none";
+  clone.style.margin = "0";
+  clone.style.position = "relative";
+  clone.style.top = "0";
 
   wrapper.innerHTML = "";
   wrapper.appendChild(clone);
@@ -240,8 +243,6 @@ function update(){
     signOwnername.style.textDecoration = "none";
     signAgreementDate.style.textDecoration = "none";
   }
-
-  
 
   //CDW
   if (isCDW){

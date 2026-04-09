@@ -83,12 +83,11 @@ body{
   display: flex;
   justify-content: center;
   background-color: #f0f0f0;
-  gap: 1em;
   width: 100%;
   flex-wrap: wrap;
 }
 .main-pdf-container{
-  padding: 20px 0 50px 0;
+  padding: 0 0 50px 0;
 }
 
 .column-4{
@@ -348,4 +347,14 @@ body{
     transform-origin: top center; /* Scale from the top-middle */
     transition: transform 0.2s ease; /* Smooth transition when resizing */
     margin-bottom: 20px;
+}
+
+#pdf-render-wrapper {
+    position: fixed; /* Fixed keeps it at 0,0 relative to the screen */
+    top: 0;
+    left: 0;
+    width: 8.5in;
+    /* z-index: -9999; Hidden behind everything */
+    /* visibility: hidden; */
+    overflow: visible;
 }
